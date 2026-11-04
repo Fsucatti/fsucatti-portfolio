@@ -17,6 +17,15 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    title: "Telar",
+    description:
+      "A visual AI agent builder: connect models, documents and tools on a canvas, then run them with real AI. Design by Julian Sucatti.",
+    image: "telar.webp",
+    stack: ["React", "TypeScript", "React Flow", "Workers AI", "Cloudflare"],
+    demo: "https://telar.fsucatti-portfolio.workers.dev",
+    code: "https://github.com/Fsucatti/telar",
+  },
+  {
     title: "Collab Notes",
     description:
       "Real-time collaborative docs with live presence, anchored comments, revision history, and public sharing.",
