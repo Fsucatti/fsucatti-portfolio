@@ -1,0 +1,61 @@
+---
+import { ClientRouter } from "astro:transitions";
+import Sidebar from "../components/Sidebar.astro";
+import { site } from "../data/site";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  /** Background palette, defined in src/styles/global.css. */
+  aura?: "home" | "about" | "projects" | "contact";
+}
+
+const { title, description = site.description, aura = "home" } = Astro.props;
+const fullTitle = title === site.name ? `${site.name} | Full-Stack Developer` : `${title} | ${site.name}`;
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const ogImage = Astro.site ? new URL("/projects/portfolio.webp", Astro.site).href : undefined;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#030712" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <script is:inline>
+      // Show the loader on the first visit of a session only.
+      try {
+        if (!sessionStorage.getItem("seen")) {
+          document.documentElement.classList.add("show-loader");
+          sessionStorage.setItem("seen", "1");
+        }
+      } catch {}
+    </script>
+    <ClientRouter />
+  </head>
+  <body data-aura={aura}>
+    <div class="aura" aria-hidden="true"></div>
+    <div class="loader" aria-hidden="true">
+      <div class="relative grid h-32 w-32 place-items-center">
+        <span class="h-12 w-12 animate-pulse rounded-full bg-emerald-400 shadow-[0_0_40px_rgba(16,185,129,0.9)]"></span>
+        <span class="absolute h-16 w-16 animate-ping rounded-full border-4 border-emerald-400/60"></span>
+        <span class="absolute h-24 w-24 animate-ping rounded-full border-4 border-emerald-500/40"></span>
+      </div>
+    </div>
+    <Sidebar />
+    <main class="pb-20 md:pb-0 md:pl-20">
+      <slot />
+    </main>
+  </body>
+</html>

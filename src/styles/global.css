@@ -1,0 +1,191 @@
+@import "tailwindcss";
+@import "@fontsource-variable/roboto-mono";
+
+/* ---------------------------------------------------------------
+   Design tokens. Change a color here and it changes everywhere.
+   --------------------------------------------------------------- */
+@theme {
+  --font-mono: "Roboto Mono Variable", ui-monospace, monospace;
+  --color-rail: #030712;
+  --color-accent: #facc15;
+  --color-accent-soft: #fde047;
+  --color-mint: #5eead4;
+  --color-emerald: #34d399;
+  --color-iris: #a5b4fc;
+  --color-ink: #f3f4f6;
+  --color-muted: #b6bdc9;
+  --color-line: rgb(255 255 255 / 0.12);
+  --color-glass: rgb(8 13 24 / 0.62);
+}
+
+/* Each page sets data-aura on <body> to pick its background. */
+body {
+  --aura: linear-gradient(135deg, #042f2e, #134e4a 40%, #000);
+  --aura-glow: rgb(5 150 105 / 0.32);
+  min-height: 100dvh;
+  background: #000;
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  -webkit-font-smoothing: antialiased;
+}
+body[data-aura="about"] {
+  --aura: linear-gradient(135deg, #000, #1e1b4b 52%, #000);
+  --aura-glow: rgb(79 70 229 / 0.3);
+}
+body[data-aura="projects"] {
+  --aura: linear-gradient(180deg, #000, #0f172a 50%, #000);
+  --aura-glow: rgb(56 189 248 / 0.14);
+}
+body[data-aura="contact"] {
+  --aura: linear-gradient(180deg, #000, #0c4a6e 50%, #000);
+  --aura-glow: rgb(45 212 191 / 0.14);
+}
+
+.aura {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(45rem 32rem at 72% 18%, var(--aura-glow), transparent 70%), var(--aura);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@layer components {
+  .gradient-title {
+    background: linear-gradient(90deg, #818cf8, #5eead4, #facc15);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .gradient-name {
+    background: linear-gradient(90deg, #4ade80, #fde047, #6ee7b7, #4ade80);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 6s linear infinite;
+  }
+  .glass {
+    border: 1px solid var(--color-line);
+    border-radius: 1rem;
+    background: var(--color-glass);
+    backdrop-filter: blur(12px);
+  }
+  .btn {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1px solid currentColor;
+    border-radius: 0.625rem;
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    transition: background-color 200ms, color 200ms, transform 200ms;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn-emerald {
+    color: var(--color-emerald);
+    background: rgb(52 211 153 / 0.12);
+  }
+  .btn-emerald:hover {
+    background: var(--color-emerald);
+    color: #000;
+  }
+  .btn-accent {
+    color: var(--color-accent);
+    background: rgb(250 204 21 / 0.1);
+  }
+  .btn-accent:hover {
+    background: var(--color-accent);
+    color: #000;
+  }
+  .btn-mint {
+    color: var(--color-mint);
+  }
+  .btn-mint:hover {
+    background: var(--color-mint);
+    color: #000;
+  }
+  .field {
+    width: 100%;
+    border: 1px solid var(--color-line);
+    border-radius: 0.625rem;
+    background: rgb(3 7 18 / 0.55);
+    padding: 0.75rem 1rem;
+    color: var(--color-ink);
+    transition: border-color 200ms;
+  }
+  .field::placeholder {
+    color: #9ca3af;
+  }
+  .field:focus {
+    border-color: var(--color-mint);
+    outline: 2px solid rgb(94 234 212 / 0.35);
+    outline-offset: 0;
+  }
+  .rise {
+    animation: rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: var(--delay, 0ms);
+  }
+  .card-glow {
+    transition: transform 250ms, border-color 250ms, box-shadow 250ms;
+  }
+  .card-glow:hover {
+    transform: translateY(-4px);
+    border-color: rgb(94 234 212 / 0.5);
+    box-shadow: 0 0 34px rgb(56 189 248 / 0.28);
+  }
+}
+
+@keyframes shimmer {
+  to {
+    background-position: 200% center;
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+@keyframes loader-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* First-visit loader. Pure CSS, so a script failure can never leave it stuck. */
+.loader {
+  display: none;
+}
+html.show-loader .loader {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: grid;
+  place-items: center;
+  background: #000;
+  pointer-events: none;
+  animation: loader-out 350ms ease-out 750ms forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}

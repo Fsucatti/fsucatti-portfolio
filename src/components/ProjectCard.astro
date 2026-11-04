@@ -1,0 +1,41 @@
+---
+import type { Project } from "../data/projects";
+
+interface Props {
+  project: Project;
+  index: number;
+}
+
+const { project, index } = Astro.props;
+---
+
+<article class="glass card-glow rise flex flex-col overflow-hidden" style={`--delay: ${index * 90}ms`}>
+  <img
+    src={`/projects/${project.image}`}
+    alt={`Screenshot of ${project.title}`}
+    width="800"
+    height="500"
+    loading={index < 2 ? "eager" : "lazy"}
+    decoding="async"
+    class="aspect-[16/10] w-full border-b border-line object-cover object-top"
+  />
+  <div class="flex flex-1 flex-col p-5">
+    <h2 class="text-xl font-semibold text-white">{project.title}</h2>
+    <p class="mt-2 text-sm leading-relaxed text-muted">{project.description}</p>
+    <ul class="mt-4 flex flex-wrap gap-1.5" aria-label="Built with">
+      {project.stack.map((tech) => <li class="rounded-md bg-white/8 px-2 py-0.5 text-xs text-mint">{tech}</li>)}
+    </ul>
+    <div class="mt-auto flex flex-wrap gap-3 pt-5">
+      {
+        project.demo && (
+          <a href={project.demo} target="_blank" rel="noopener noreferrer" class="btn btn-mint flex-1 text-sm whitespace-nowrap" aria-label={`Live demo of ${project.title}`}>
+            Live demo
+          </a>
+        )
+      }
+      <a href={project.code} target="_blank" rel="noopener noreferrer" class="btn flex-1 text-sm whitespace-nowrap text-gray-200 hover:bg-white hover:text-black" aria-label={`Source code of ${project.title}`}>
+        Code
+      </a>
+    </div>
+  </div>
+</article>

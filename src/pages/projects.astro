@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { projects } from "../data/projects";
+import { site } from "../data/site";
+---
+
+<BaseLayout title="Projects" description={`Web apps built by ${site.name}, with live demos and source code.`} aura="projects">
+  <section class="mx-auto max-w-7xl px-6 py-12 md:py-16">
+    <h1 class="gradient-title rise text-center text-4xl font-extrabold tracking-wide md:text-5xl">PROJECTS</h1>
+    <div class="mx-auto mt-5 mb-12 h-1 w-24 rounded-full bg-gradient-to-r from-indigo-500 to-teal-400"></div>
+    <div class="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+      {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
+    </div>
+  </section>
+</BaseLayout>

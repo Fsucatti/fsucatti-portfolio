@@ -1,0 +1,10 @@
+{
+  // Cloudflare Workers static assets: the site has no server code.
+  "name": "fsucatti-portfolio",
+  "compatibility_date": "2026-11-03",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "drop-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}

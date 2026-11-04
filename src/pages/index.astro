@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout title={site.name} aura="home">
+  <section class="relative isolate flex min-h-[calc(100dvh-5rem)] flex-col items-center justify-center overflow-hidden px-6 text-center md:min-h-dvh">
+    <canvas id="particles" class="absolute inset-0 -z-10 h-full w-full" aria-hidden="true"></canvas>
+
+    <h1 class="gradient-name rise text-[clamp(2.75rem,10vw,7rem)] leading-[1.05] font-extrabold tracking-tight">
+      {site.name}
+    </h1>
+    <p class="rise mt-5 text-lg text-gray-200 md:text-2xl" style="--delay: 150ms">{site.role}</p>
+
+    <div class="rise mt-9 flex flex-wrap justify-center gap-4" style="--delay: 300ms">
+      <a href="/projects" class="btn btn-emerald">View Projects</a>
+      <a href="/contact" class="btn btn-accent">Contact Me</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import { startParticles } from "../scripts/particles";
+
+  document.addEventListener("astro:page-load", () => {
+    const canvas = document.querySelector<HTMLCanvasElement>("#particles");
+    if (!canvas) return;
+    const stop = startParticles(canvas);
+    document.addEventListener("astro:before-swap", stop, { once: true });
+  });
+</script>

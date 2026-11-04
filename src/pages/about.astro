@@ -1,0 +1,66 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+
+const skills = ["React", "Next.js", "TailwindCSS", "MongoDB", "Postman"];
+---
+
+<BaseLayout title="About" description={`About ${site.name}, a full-stack developer from Buenos Aires.`} aura="about">
+  <section class="mx-auto grid min-h-dvh max-w-6xl items-center gap-6 px-6 py-10 lg:grid-cols-[1.1fr_1fr] lg:gap-12">
+    <div
+      id="earth"
+      class="rise relative aspect-square w-full cursor-grab overflow-hidden rounded-3xl active:cursor-grabbing"
+      role="img"
+      aria-label="A rotating 3D planet surrounded by stars"
+    >
+    </div>
+
+    <div class="glass rise space-y-6 p-6 md:p-8" style="--delay: 150ms">
+      <h1 class="inline-block border-b-[3px] border-accent pb-2 text-4xl font-extrabold text-accent drop-shadow-[0_0_12px_rgba(250,204,21,0.5)] md:text-5xl">
+        About Me
+      </h1>
+      <p class="leading-relaxed text-gray-200 md:text-lg">
+        Hi, I'm <span class="font-semibold text-accent-soft">{site.name}</span>. I'm a{" "}
+        <span class="font-medium text-iris">full-stack developer</span> passionate about building clean, responsive, and
+        interactive web apps that turn ideas into beautiful, functional websites.
+      </p>
+      <p class="leading-relaxed text-gray-200 md:text-lg">
+        When I'm not coding, you'll probably find me{" "}
+        <em class="text-iris">
+          going on bike rides, spending time with my cat, playing my favorite videogames, and watching my favorite local
+          futbol team
+        </em>. I love solving problems and creating experiences that people genuinely enjoy using.
+      </p>
+      <ul class="flex flex-wrap gap-2" aria-label="Tools I enjoy working with">
+        {skills.map((skill) => <li class="rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-sm text-accent-soft">{skill}</li>)}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  document.addEventListener("astro:page-load", async () => {
+    const container = document.querySelector<HTMLElement>("#earth");
+    if (!container) return;
+
+    let stopped = false;
+    let stop = () => {};
+    document.addEventListener(
+      "astro:before-swap",
+      () => {
+        stopped = true;
+        stop();
+      },
+      { once: true },
+    );
+
+    try {
+      const { startEarth } = await import("../scripts/earth");
+      if (!stopped) stop = startEarth(container);
+    } catch (error) {
+      // No WebGL: show a static image of the planet instead of an empty box.
+      console.warn("3D planet unavailable", error);
+      container.innerHTML = `<img src="/planet.jpg" alt="" class="absolute inset-[12%] h-[76%] w-[76%] rounded-full object-cover" />`;
+    }
+  });
+</script>

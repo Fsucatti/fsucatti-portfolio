@@ -1,0 +1,75 @@
+---
+import { navigation, site } from "../data/site";
+
+const icons: Record<string, string> = {
+  home: "m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25",
+  user: "M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z",
+  folder:
+    "M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z",
+  mail: "M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75",
+};
+
+const current = Astro.url.pathname.replace(/\/$/, "") || "/";
+---
+
+<header
+  class="fixed inset-x-0 bottom-0 z-50 border-t border-line bg-rail/90 backdrop-blur-md md:inset-y-0 md:left-0 md:right-auto md:flex md:w-20 md:flex-col md:items-center md:justify-between md:border-t-0 md:border-r md:py-7"
+  style="padding-bottom: env(safe-area-inset-bottom)"
+>
+  <a href="/" aria-label={`${site.name}, home`} class="group relative hidden h-12 w-12 place-items-center md:grid">
+    <span class="absolute text-3xl font-extrabold text-accent transition-opacity duration-300 group-hover:opacity-0">F</span>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+      class="absolute h-10 w-10 text-accent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+    >
+      <path d="M14 9V3L11 4H8L5 3V9L9.5 11L14 9ZM14 9L20 12L22 18L20 21H4L2 19L4 17L2 15L4 13M7 21V9.88889M11 15V21L16.0435 16H18M8 7L8.00707 7.00707M11 7L11.0071 7.00707"></path>
+    </svg>
+  </a>
+
+  <nav aria-label="Main">
+    <ul class="flex justify-around md:flex-col md:gap-3">
+      {
+        navigation.map((item) => {
+          const active = current === item.href;
+          return (
+            <li>
+              <a
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                class:list={[
+                  "group relative flex h-14 w-16 flex-col items-center justify-center gap-0.5 transition-colors duration-200 md:h-11 md:w-11",
+                  active ? "text-accent drop-shadow-[0_0_8px_rgba(250,204,21,0.8)]" : "text-gray-400 hover:text-white",
+                ]}
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" class="h-6 w-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d={icons[item.icon]} />
+                </svg>
+                <span class="text-[0.6875rem] md:pointer-events-none md:absolute md:left-full md:ml-3 md:rounded-md md:border md:border-line md:bg-rail md:px-2.5 md:py-1 md:text-xs md:text-accent-soft md:opacity-0 md:transition-opacity md:group-hover:opacity-100 md:group-focus-visible:opacity-100">
+                  {item.label}
+                </span>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </nav>
+
+  <a
+    href={site.github}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="GitHub profile"
+    class="hidden h-11 w-11 place-items-center text-accent transition-transform duration-200 hover:scale-110 md:grid"
+  >
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-6 w-6">
+      <path d="M12 .5C5.648.5.5 5.648.5 12c0 5.086 3.293 9.387 7.865 10.915.575.106.785-.25.785-.554 0-.273-.01-1.171-.015-2.125-3.2.696-3.878-1.542-3.878-1.542-.523-1.329-1.278-1.683-1.278-1.683-1.046-.715.08-.701.08-.701 1.158.082 1.768 1.19 1.768 1.19 1.03 1.764 2.704 1.255 3.364.959.106-.746.402-1.255.73-1.543-2.555-.291-5.238-1.278-5.238-5.686 0-1.256.45-2.283 1.187-3.089-.12-.29-.514-1.463.113-3.05 0 0 .967-.31 3.17 1.18a11.07 11.07 0 0 1 2.885-.388c.979.004 1.964.132 2.885.388 2.2-1.49 3.166-1.18 3.166-1.18.63 1.587.237 2.76.116 3.05.74.806 1.187 1.833 1.187 3.089 0 4.418-2.687 5.392-5.252 5.678.414.357.783 1.065.783 2.149 0 1.551-.014 2.802-.014 3.183 0 .308.207.665.79.553C20.71 21.384 24 17.083 24 12c0-6.352-5.148-11.5-12-11.5z"></path>
+    </svg>
+  </a>
+</header>
