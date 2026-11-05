@@ -85,5 +85,3 @@ npm run build
 ```bash
 npm test
 ```
-
-Las pruebas no envían emails reales: interceptan la llamada a EmailJS.
