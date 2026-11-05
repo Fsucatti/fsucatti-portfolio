@@ -26,6 +26,15 @@ export const projects: Project[] = [
     code: "https://github.com/Fsucatti/telar",
   },
   {
+    title: "Cantera",
+    description:
+      "An esports talent platform: browse job listings, apply, follow teams and message AI-played recruiters. Design by Julian Sucatti.",
+    image: "cantera.webp",
+    stack: ["React", "TypeScript", "Hono", "Cloudflare D1", "Workers AI"],
+    demo: "https://cantera.fsucatti-portfolio.workers.dev",
+    code: "https://github.com/Fsucatti/cantera",
+  },
+  {
     title: "Collab Notes",
     description:
       "Real-time collaborative docs with live presence, anchored comments, revision history, and public sharing.",
