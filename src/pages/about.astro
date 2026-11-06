@@ -2,7 +2,20 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { site } from "../data/site";
 
-const skills = ["React", "Next.js", "TailwindCSS", "MongoDB", "Postman"];
+// Tools used across the projects on /projects.
+const skills = [
+  "React",
+  "TypeScript",
+  "Next.js",
+  "Astro",
+  "Tailwind CSS",
+  "Node.js",
+  "PostgreSQL",
+  "MongoDB",
+  "Cloudflare Workers",
+  "Playwright",
+  "Postman",
+];
 ---
 
 <BaseLayout title="About" description={`About ${site.name}, a full-stack developer from Buenos Aires.`} aura="about">
@@ -27,7 +40,7 @@ const skills = ["React", "Next.js", "TailwindCSS", "MongoDB", "Postman"];
       <p class="leading-relaxed text-gray-200 md:text-lg">
         When I'm not coding, you'll probably find me{" "}
         <em class="text-iris">
-          going on bike rides, spending time with my cat, playing my favorite videogames, and watching my favorite local
+          going on bike rides, spending time with my cat, playing my favorite video games, and watching my favorite local
           futbol team
         </em>. I love solving problems and creating experiences that people genuinely enjoy using.
       </p>

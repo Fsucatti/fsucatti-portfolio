@@ -48,8 +48,9 @@ export const projects: Project[] = [
     description:
       "Real-time collaborative docs with live presence, anchored comments, revision history, and public sharing.",
     image: "collaboration.webp",
-    stack: ["Next.js", "PostgreSQL", "Prisma", "Socket.IO", "TipTap"],
-    demo: "https://collab-app-fsucatti.vercel.app/docs",
+    stack: ["Next.js", "TipTap", "PostgreSQL", "Prisma", "Durable Objects"],
+    // The public guide opens without signing in; /docs asks for GitHub first.
+    demo: "https://collab-app-fsucatti.vercel.app/p/guide",
     code: "https://github.com/Fsucatti/collab-app",
   },
   {
