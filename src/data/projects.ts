@@ -17,6 +17,15 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    title: "Nimbo",
+    description:
+      "A detailed weather app for any place: a sky drawn from live data, an hour-by-hour meteogram, air quality, sun and moon, climate normals, nine models compared and rain radar.",
+    image: "nimbo.webp",
+    stack: ["React", "TypeScript", "D3", "MapLibre", "Cloudflare"],
+    demo: "https://nimbo.fsucatti-portfolio.workers.dev",
+    code: "https://github.com/Fsucatti/nimbo",
+  },
+  {
     title: "Telar",
     description:
       "A visual AI agent builder: connect models, documents and tools on a canvas, then run them with real AI. Design by Julian Sucatti.",
