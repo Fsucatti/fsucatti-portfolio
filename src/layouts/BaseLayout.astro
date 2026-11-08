@@ -15,6 +15,7 @@ const { title, description = site.description, aura = "home" } = Astro.props;
 const fullTitle = title === site.name ? `${site.name} | Full-Stack Developer` : `${title} | ${site.name}`;
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
 const ogImage = Astro.site ? new URL("/projects/portfolio.webp", Astro.site).href : undefined;
+const analytics = Astro.site && site.analyticsToken ? { host: Astro.site.hostname, token: site.analyticsToken } : undefined;
 ---
 
 <!doctype html>
@@ -43,6 +44,21 @@ const ogImage = Astro.site ? new URL("/projects/portfolio.webp", Astro.site).hre
       } catch {}
     </script>
     <ClientRouter />
+    {
+      analytics && (
+        <script is:inline define:vars={analytics}>
+          // Only on the public address, so local visits aren't counted. It tracks page changes by itself.
+          if (location.hostname === host && !window.analyticsLoaded) {
+            window.analyticsLoaded = true;
+            const beacon = document.createElement("script");
+            beacon.defer = true;
+            beacon.src = "https://static.cloudflareinsights.com/beacon.min.js";
+            beacon.dataset.cfBeacon = JSON.stringify({ token, spa: true });
+            document.head.append(beacon);
+          }
+        </script>
+      )
+    }
   </head>
   <body data-aura={aura}>
     <div class="aura" aria-hidden="true"></div>

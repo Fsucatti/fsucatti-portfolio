@@ -5,6 +5,8 @@
  */
 export interface Project {
   title: string;
+  /** Address of its case study: /projects/<slug>. Needs an entry in case-studies.ts. */
+  slug: string;
   description: string;
   /** File name inside public/projects/. */
   image: string;
@@ -18,6 +20,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     title: "Nimbo",
+    slug: "nimbo",
     description:
       "A detailed weather app for any place: a sky drawn from live data, an hour-by-hour meteogram, air quality, sun and moon, climate normals, nine models compared and rain radar.",
     image: "nimbo.webp",
@@ -27,6 +30,7 @@ export const projects: Project[] = [
   },
   {
     title: "Telar",
+    slug: "telar",
     description:
       "A visual AI agent builder: connect models, documents and tools on a canvas, then run them with real AI. Design by Julian Sucatti.",
     image: "telar.webp",
@@ -36,6 +40,7 @@ export const projects: Project[] = [
   },
   {
     title: "Cantera",
+    slug: "cantera",
     description:
       "An esports talent platform: browse job listings, apply, follow teams and message AI-played recruiters. Design by Julian Sucatti.",
     image: "cantera.webp",
@@ -45,6 +50,7 @@ export const projects: Project[] = [
   },
   {
     title: "Collab Notes",
+    slug: "collab-notes",
     description:
       "Real-time collaborative docs with live presence, anchored comments, revision history, and public sharing.",
     image: "collaboration.webp",
@@ -55,6 +61,7 @@ export const projects: Project[] = [
   },
   {
     title: "Journal App",
+    slug: "journal-app",
     description:
       "A personal journal with user accounts, authentication, and full create, read, update, and delete for entries.",
     image: "journal.webp",
@@ -64,6 +71,7 @@ export const projects: Project[] = [
   },
   {
     title: "Interactive Dashboard",
+    slug: "interactive-dashboard",
     description:
       "A data visualization dashboard with analytics, reports, and settings sections.",
     image: "dashboard.webp",
@@ -73,6 +81,7 @@ export const projects: Project[] = [
   },
   {
     title: "Calculator App",
+    slug: "calculator-app",
     description: "A simple yet stylish calculator with smooth animations.",
     image: "calculator.webp",
     stack: ["Next.js", "Framer Motion", "Tailwind CSS"],
@@ -81,6 +90,7 @@ export const projects: Project[] = [
   },
   {
     title: "This Portfolio",
+    slug: "portfolio",
     description:
       "The site you are on: a fast static build with a 3D globe, served from Cloudflare's network.",
     image: "portfolio.webp",

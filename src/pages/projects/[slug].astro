@@ -1,0 +1,70 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { caseStudies } from "../../data/case-studies";
+import { projects } from "../../data/projects";
+
+export function getStaticPaths() {
+  return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
+}
+
+const { project } = Astro.props;
+const study = caseStudies[project.slug];
+if (!study) throw new Error(`Missing case study for ${project.slug}`);
+---
+
+<BaseLayout title={project.title} description={project.description} aura="projects">
+  <article class="mx-auto max-w-3xl space-y-8 px-6 py-12 md:py-16">
+    <a href="/projects" class="text-sm text-mint underline-offset-4 hover:underline">← All projects</a>
+
+    <header class="rise space-y-4">
+      <h1 class="gradient-title text-4xl font-extrabold md:text-5xl">{project.title}</h1>
+      <p class="leading-relaxed text-gray-200 md:text-lg">{project.description}</p>
+      <ul class="flex flex-wrap gap-1.5" aria-label="Built with">
+        {project.stack.map((tech) => <li class="rounded-md bg-white/8 px-2 py-0.5 text-xs text-mint">{tech}</li>)}
+      </ul>
+      <div class="flex flex-wrap gap-3">
+        {project.demo && <a href={project.demo} target="_blank" rel="noopener noreferrer" class="btn btn-mint text-sm">Live demo</a>}
+        <a href={project.code} target="_blank" rel="noopener noreferrer" class="btn text-sm text-gray-200 hover:bg-white hover:text-black">Code</a>
+      </div>
+    </header>
+
+    <img
+      src={`/projects/${project.image}`}
+      alt={`Screenshot of ${project.title}`}
+      width="800"
+      height="500"
+      class="glass rise aspect-[16/10] w-full object-cover object-top"
+    />
+
+    <section class="glass space-y-3 p-6">
+      <h2 class="text-xl font-bold text-accent">The problem</h2>
+      <p class="leading-relaxed text-gray-200">{study.problem}</p>
+    </section>
+
+    <section class="glass space-y-4 p-6">
+      <h2 class="text-xl font-bold text-accent">Key decisions</h2>
+      {
+        study.decisions.map((decision) => (
+          <div>
+            <h3 class="font-semibold text-mint">{decision.title}</h3>
+            <p class="mt-1 leading-relaxed text-gray-200">{decision.text}</p>
+          </div>
+        ))
+      }
+    </section>
+
+    <section class="glass space-y-3 p-6">
+      <h2 class="text-xl font-bold text-accent">What I learned</h2>
+      <ul class="list-disc space-y-2 pl-5 leading-relaxed text-gray-200">
+        {study.learned.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+
+    <section class="glass space-y-3 p-6">
+      <h2 class="text-xl font-bold text-accent">What's next</h2>
+      <ul class="list-disc space-y-2 pl-5 leading-relaxed text-gray-200">
+        {study.next.map((item) => <li>{item}</li>)}
+      </ul>
+    </section>
+  </article>
+</BaseLayout>

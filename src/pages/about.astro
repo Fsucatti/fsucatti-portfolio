@@ -47,6 +47,10 @@ const skills = [
       <ul class="flex flex-wrap gap-2" aria-label="Tools I enjoy working with">
         {skills.map((skill) => <li class="rounded-full border border-accent/40 bg-accent/10 px-3 py-1 text-sm text-accent-soft">{skill}</li>)}
       </ul>
+      <div class="flex flex-wrap gap-3">
+        <a href={site.cv.en} download class="btn btn-accent text-sm">Download CV (English)</a>
+        <a href={site.cv.es} download class="btn btn-mint text-sm">Descargar CV (Español)</a>
+      </div>
     </div>
   </section>
 </BaseLayout>

@@ -20,11 +20,12 @@ const { project, index } = Astro.props;
     class="aspect-[16/10] w-full border-b border-line object-cover object-top"
   />
   <div class="flex flex-1 flex-col p-5">
-    <h2 class="text-xl font-semibold text-white">{project.title}</h2>
+    <h2 class="text-xl font-semibold text-white"><a href={`/projects/${project.slug}`} class="hover:text-mint">{project.title}</a></h2>
     <p class="mt-2 text-sm leading-relaxed text-muted">{project.description}</p>
     <ul class="mt-4 flex flex-wrap gap-1.5" aria-label="Built with">
       {project.stack.map((tech) => <li class="rounded-md bg-white/8 px-2 py-0.5 text-xs text-mint">{tech}</li>)}
     </ul>
+    <a href={`/projects/${project.slug}`} class="mt-4 w-fit text-sm text-accent-soft underline-offset-4 hover:underline" aria-label={`Case study of ${project.title}`}>Read the case study →</a>
     <div class="mt-auto flex flex-wrap gap-3 pt-5">
       {
         project.demo && (

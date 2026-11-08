@@ -13,6 +13,7 @@ Edita `src/data/site.ts`: nombre, rol, email, ubicación, GitHub, LinkedIn y map
 {
   title: "Mi proyecto",
   description: "Qué hace, en una o dos frases.",
+  slug: "mi-proyecto",
   image: "mi-proyecto.webp",
   stack: ["Astro", "TypeScript"],
   demo: "https://mi-proyecto.example.com", // opcional
@@ -21,6 +22,8 @@ Edita `src/data/site.ts`: nombre, rol, email, ubicación, GitHub, LinkedIn y map
 ```
 
 El orden del archivo es el orden en pantalla. Si no hay `demo`, el botón no aparece.
+
+3. Agrega su caso de estudio en `src/data/case-studies.ts`, con el mismo `slug`. Se publica en `/projects/mi-proyecto` y entra solo en el sitemap.
 
 ### Sacar una captura de un proyecto online
 

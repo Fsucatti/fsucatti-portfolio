@@ -8,6 +8,10 @@ export const site = {
   email: "fsucatti@gmail.com",
   github: "https://github.com/Fsucatti",
   linkedin: "https://www.linkedin.com/in/fsucatti",
+  /** Public CV copies, without a phone number. They are built by notas-internas/cv-publico. */
+  cv: { en: "/cv/Francisco_Sucatti_CV_EN.pdf", es: "/cv/Francisco_Sucatti_CV_ES.pdf" },
+  /** Cloudflare Web Analytics token, which is public by design. Leave it empty to turn analytics off. */
+  analyticsToken: "33bc042352c5405f88337ccb68fe0139",
   mapEmbed:
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13135.63932453793!2d-58.43708875!3d-34.608418349999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccb7f5dcf6f3f%3A0x9a58c7f2f436c2e6!2sBuenos%20Aires%20City%20Autonomous%20Capital%20Federal!5e0!3m2!1sen!2sar!4v1700000000000!5m2!1sen!2sar",
 } as const;

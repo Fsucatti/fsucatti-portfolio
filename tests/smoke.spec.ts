@@ -53,6 +53,33 @@ test("desktop rail labels stay hidden until hover", async ({ page, isMobile }) =
   await expect(label).toHaveCSS("opacity", "1");
 });
 
+test("every project has a working case study", async ({ page }) => {
+  for (const project of projects) {
+    await page.goto(`/projects/${project.slug}`);
+    await expect(page.getByRole("heading", { level: 1, name: project.title })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Key decisions" })).toBeVisible();
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - innerWidth);
+    expect(overflow).toBeLessThanOrEqual(0);
+  }
+  await page.goto("/projects");
+  await page.getByRole("link", { name: `Case study of ${projects[0].title}` }).click();
+  await expect(page).toHaveURL(new RegExp(`/projects/${projects[0].slug}$`));
+});
+
+test("sitemap lists every page and robots points to it", async ({ request }) => {
+  const sitemap = await (await request.get("/sitemap.xml")).text();
+  for (const project of projects) expect(sitemap).toContain(`/projects/${project.slug}</loc>`);
+  expect(await (await request.get("/robots.txt")).text()).toContain("sitemap.xml");
+});
+
+test("both CVs are served as PDF files", async ({ request }) => {
+  for (const path of ["/cv/Francisco_Sucatti_CV_EN.pdf", "/cv/Francisco_Sucatti_CV_ES.pdf"]) {
+    const response = await request.get(path);
+    expect(response.status()).toBe(200);
+    expect(response.headers()["content-type"]).toContain("pdf");
+  }
+});
+
 test("every project shows its links and a loaded image without hovering", async ({ page }) => {
   await page.goto("/projects");
   await expect(page.locator("article")).toHaveCount(projects.length);
