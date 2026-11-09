@@ -19,6 +19,16 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    title: "Refugio",
+    slug: "refugio",
+    description:
+      "A logic puzzle game about rescuing cats: boards you can always solve without guessing, cats with powers, a shelter to restore, a shareable daily challenge and sound made entirely in code.",
+    image: "refugio.webp",
+    stack: ["React", "TypeScript", "Web Audio", "Playwright", "Cloudflare"],
+    demo: "https://refugio.fsucatti-portfolio.workers.dev",
+    code: "https://github.com/Fsucatti/refugio",
+  },
+  {
     title: "Nimbo",
     slug: "nimbo",
     description:

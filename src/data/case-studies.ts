@@ -12,6 +12,29 @@ export interface CaseStudy {
 }
 
 export const caseStudies: Record<string, CaseStudy> = {
+  refugio: {
+    problem:
+      "Mine-sweeping games have one classic annoyance: sometimes you lose to a coin flip, not to a bad decision. I wanted a version where logic always gets you there, wrapped in a reason to come back: cats to rescue, a run-down shelter to fix up, and a daily board everyone shares.",
+    decisions: [
+      {
+        title: "A solver checks every board",
+        text: "Before a board reaches you, a small solver has to finish it using only deductions, never guesses. If it gets stuck, the board is thrown away and a new one is made. The tests generate boards at every difficulty to make sure that holds.",
+      },
+      {
+        title: "Sound with no audio files",
+        text: "The effects and the music are synthesized in the browser with the Web Audio API, in a retro style. Nothing to download and no licenses to track. And since the sound depends on what changed on the board, every move gets the right effect from one place.",
+      },
+      {
+        title: "AI art, turned into real pixel art",
+        text: "The art is generated with AI, and I say so. But AI pixel art doesn't follow a real grid, so I wrote a script that removes the background and redraws each image on an actual pixel grid with a limited palette. To keep the rooms consistent, I generated each one finished and then edited it back into older, more run-down versions.",
+      },
+    ],
+    learned: [
+      "A code review caught that browsers don't count a finger touching the screen as permission to play sound, only lifting it. Phones could have stayed silent, and my tests would never have noticed, because they use a mouse.",
+      "Dates are sneaky. Resuming a daily board right after midnight was quietly wiping people's streaks, until I started tying each attempt to the date it began and counting calendar days instead of hours.",
+    ],
+    next: ["More logic games in the same shelter", "Expeditions: several boards in a row with rules that change", "Testing it on more real phones"],
+  },
   nimbo: {
     problem:
       "Most weather apps give you a temperature and a little cloud, and that's about it. I wanted one that keeps going when you have more questions: how sure is this forecast? Is today weird for this time of year? When's the best hour to go out? And I wanted all of that with no account and no paid API.",
