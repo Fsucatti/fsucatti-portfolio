@@ -19,14 +19,14 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    title: "Refugio",
-    slug: "refugio",
+    title: "Angry Cats Need Naps Too",
+    slug: "angry-cats-need-naps",
     description:
       "A logic puzzle game about rescuing cats: boards you can always solve without guessing, cats with powers, a shelter to restore, a shareable daily challenge and sound made entirely in code.",
-    image: "refugio.webp",
+    image: "angry-cats-need-naps.webp",
     stack: ["React", "TypeScript", "Web Audio", "Playwright", "Cloudflare"],
-    demo: "https://refugio.fsucatti-portfolio.workers.dev",
-    code: "https://github.com/Fsucatti/refugio",
+    demo: "https://angry-cats-need-naps.fsucatti-portfolio.workers.dev",
+    code: "https://github.com/Fsucatti/angry-cats-need-naps",
   },
   {
     title: "Nimbo",

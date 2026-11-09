@@ -12,7 +12,7 @@ export interface CaseStudy {
 }
 
 export const caseStudies: Record<string, CaseStudy> = {
-  refugio: {
+  "angry-cats-need-naps": {
     problem:
       "Mine-sweeping games have one classic annoyance: sometimes you lose to a coin flip, not to a bad decision. I wanted a version where logic always gets you there, wrapped in a reason to come back: cats to rescue, a run-down shelter to fix up, and a daily board everyone shares.",
     decisions: [
