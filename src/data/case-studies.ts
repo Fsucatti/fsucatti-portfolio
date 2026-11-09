@@ -12,6 +12,29 @@ export interface CaseStudy {
 }
 
 export const caseStudies: Record<string, CaseStudy> = {
+  "mako-works": {
+    problem:
+      "Most store demos look the same: a grid of cards and a cart icon. I wanted a shop for consoles, games and PC parts that looked like nothing else, and that still worked like a real one underneath: a catalog you can filter, stock that runs out, orders that get saved, and a way to build a PC without picking parts that don't fit together.",
+    decisions: [
+      {
+        title: "The home page is a motherboard",
+        text: "The featured product sits in the CPU socket and each category is a chip wired to it. Point at a chip and current runs down its trace; add something to the cart and a pulse travels to it. I kept that one idea and let everything else stay quiet: products are drawn as part footprints, with the reference code a real board would print next to them.",
+      },
+      {
+        title: "The last unit can't sell twice",
+        text: "Placing an order takes the stock off in the same database transaction that saves it, and the table refuses to go below zero. If two people check out the last graphics card at once, one order goes through and the other is told it just sold out.",
+      },
+      {
+        title: "One set of compatibility rules",
+        text: "The PC builder checks the socket, DDR4 or DDR5, board size against the case, card length, cooler height, radiator size and power draw. The rules live in one file that the page and the server both use, and parts that won't fit say why instead of just disappearing.",
+      },
+    ],
+    learned: [
+      "Finding product photos was harder than building the store. Free-licensed photos covered only about a quarter of the catalog, so the rest are official images from each maker, credited, and products with no usable image were swapped for equivalents.",
+      "I tried original SVG drawings and AI renders before settling on photos. The drawings stayed in as a fallback, and the renders matched the style but often got the exact model wrong.",
+    ],
+    next: ["Accounts, so orders follow you between devices", "Reviews written by people, not generated", "Saving and sharing PC builds by link"],
+  },
   "angry-cats-need-naps": {
     problem:
       "Mine-sweeping games have one classic annoyance: sometimes you lose to a coin flip, not to a bad decision. I wanted a version where logic always gets you there, wrapped in a reason to come back: cats to rescue, a run-down shelter to fix up, and a daily board everyone shares.",

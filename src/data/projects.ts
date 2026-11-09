@@ -19,6 +19,16 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    title: "Mako Works",
+    slug: "mako-works",
+    description:
+      "An electronics store designed like a circuit board: a catalog with real filters, a cart, checkout and orders, and a PC builder that checks every part against the rest of the build.",
+    image: "mako-works.webp",
+    stack: ["React", "TypeScript", "Hono", "D1", "Cloudflare"],
+    demo: "https://mako-works.fsucatti-portfolio.workers.dev",
+    code: "https://github.com/Fsucatti/mako-works",
+  },
+  {
     title: "Angry Cats Need Naps Too",
     slug: "angry-cats-need-naps",
     description:
