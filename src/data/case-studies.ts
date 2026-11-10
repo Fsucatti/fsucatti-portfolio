@@ -1,7 +1,8 @@
 /**
  * The story behind each project, shown at /projects/<slug>.
- * Written the way I'd tell it to someone. Keep it to what actually happened.
- * Security details and limits stay out of public pages.
+ * Written the way I'd tell it to someone: what the project does and why it's built that way.
+ * Leave out the behind-the-scenes: bugs found along the way, failed attempts, tools and workflow.
+ * Security details and limits stay out of public pages too.
  */
 export interface CaseStudy {
   /** What the project had to solve. */
@@ -30,8 +31,8 @@ export const caseStudies: Record<string, CaseStudy> = {
       },
     ],
     learned: [
-      "Finding product photos was harder than building the store. Free-licensed photos covered only about a quarter of the catalog, so the rest are official images from each maker, credited, and products with no usable image were swapped for equivalents.",
-      "I tried original SVG drawings and AI renders before settling on photos. The drawings stayed in as a fallback, and the renders matched the style but often got the exact model wrong.",
+      "A store lives or dies by its catalog. Real specs and real product photos, each one credited, make the whole thing feel trustworthy in a way no layout can.",
+      "Telling people why something doesn't fit is worth more than hiding it. A builder that explains itself teaches you something about PCs along the way.",
     ],
     next: ["Accounts, so orders follow you between devices", "Reviews written by people, not generated", "Saving and sharing PC builds by link"],
   },
@@ -40,21 +41,21 @@ export const caseStudies: Record<string, CaseStudy> = {
       "Mine-sweeping games have one classic annoyance: sometimes you lose to a coin flip, not to a bad decision. I wanted a version where logic always gets you there, wrapped in a reason to come back: cats to rescue, a run-down shelter to fix up, and a daily board everyone shares.",
     decisions: [
       {
-        title: "A solver checks every board",
-        text: "Before a board reaches you, a small solver has to finish it using only deductions, never guesses. If it gets stuck, the board is thrown away and a new one is made. The tests generate boards at every difficulty to make sure that holds.",
+        title: "Every board can be solved with logic",
+        text: "Before a board reaches you, a small solver has to finish it using only deductions, never guesses. If it can't, the board is thrown away and a new one is made. If you lose, it was a call you made, not luck.",
       },
       {
         title: "Sound with no audio files",
-        text: "The effects and the music are synthesized in the browser with the Web Audio API, in a retro style. Nothing to download and no licenses to track. And since the sound depends on what changed on the board, every move gets the right effect from one place.",
+        text: "The effects and the music are synthesized in the browser with the Web Audio API, in a retro style. Nothing to download and no licenses to track, and every move gets the right sound from one place.",
       },
       {
-        title: "AI art, turned into real pixel art",
-        text: "The art is generated with AI, and I say so. But AI pixel art doesn't follow a real grid, so I wrote a script that removes the background and redraws each image on an actual pixel grid with a limited palette. To keep the rooms consistent, I generated each one finished and then edited it back into older, more run-down versions.",
+        title: "Real pixel art",
+        text: "The art is AI-generated, and the game says so. Each image is redrawn on an actual pixel grid with a limited palette, so everything shares the same crisp retro look, and the shelter's rooms go from run-down to cozy as you fix them up.",
       },
     ],
     learned: [
-      "A code review caught that browsers don't count a finger touching the screen as permission to play sound, only lifting it. Phones could have stayed silent, and my tests would never have noticed, because they use a mouse.",
-      "Dates are sneaky. Resuming a daily board right after midnight was quietly wiping people's streaks, until I started tying each attempt to the date it began and counting calendar days instead of hours.",
+      "A daily challenge is mostly about time. Streaks, midnight and time zones need as much care as the puzzle itself.",
+      "Phones and computers treat touch and sound differently, so a game has to be played on both to feel right on both.",
     ],
     next: ["More logic games in the same shelter", "Expeditions: several boards in a row with rules that change", "Testing it on more real phones"],
   },
@@ -76,8 +77,8 @@ export const caseStudies: Record<string, CaseStudy> = {
       },
     ],
     learned: [
-      "The map refused to load until I bundled its worker explicitly and allowed it in the site's content security policy. I kept the strict policy, but now I know every new service I add has to go through it.",
-      "The browser tests use saved copies of the weather responses. Otherwise a test could fail just because it started raining somewhere.",
+      "Free data comes with real conditions: credits, fair use, how often you can ask. Designing around them from the start shaped the whole app.",
+      "Weather changes every minute, so the app is tested against saved forecasts. That way a test checks the app, not the sky.",
     ],
     next: ["Official alerts, wherever there's an open source for them", "A Spanish version", "Making it installable, so the last forecast still works offline"],
   },
@@ -86,21 +87,21 @@ export const caseStudies: Record<string, CaseStudy> = {
       "My brother Julian designed a visual builder for AI agents, and I wanted to know if I could turn it into something that really runs. So: blocks on a canvas, wired together, calling real models, with no sign-up and nothing to pay for whoever tries it.",
     decisions: [
       {
-        title: "Trying the models before offering them",
-        text: "I tested the free models myself for speed and accuracy. One was the fastest of the bunch, and it also answered \"no\" to all six yes-or-no checks I gave it. Great speed, not much use for making decisions, so a different model handles AI conditions.",
+        title: "Each model gets the job it's good at",
+        text: "Free models differ a lot in speed and accuracy, so I compared them before offering any. The quickest ones handle the chatty parts, and a more careful one decides the yes-or-no conditions that send a message down one path or another.",
       },
       {
-        title: "Changing the design where I had to",
-        text: "Julian's design runs Python in its code blocks and has an \"activate\" step. Telar runs JavaScript instead, and you get a Share link. The blocks I haven't built yet are greyed out and say so, because I'd rather show that than a button that does nothing.",
+        title: "Adapting the design to the web",
+        text: "Julian's design runs Python in its code blocks and has an \"activate\" step. Telar runs JavaScript right in the browser, and you get a Share link instead. Blocks that aren't built yet are greyed out and say so.",
       },
       {
-        title: "A fake mode for the tests",
-        text: "The browser tests go through the whole canvas with simulated answers. That keeps them fast and repeatable, and they don't spend real model usage every time I run them.",
+        title: "Tests that don't depend on AI",
+        text: "The browser tests go through the whole canvas with simulated answers, so they're fast and give the same result every time.",
       },
     ],
     learned: [
-      "One model used up its whole token budget thinking and never answered a simple hello. Turning thinking off fixed it and made each call way cheaper. I only found that by looking at what it actually sent back.",
-      "A model's speed isn't one number. The same one could answer in a couple of seconds and later take almost twenty, so the interface has to be good at waiting.",
+      "Building on top of AI means designing for waiting: an answer can take a second or much longer, so the interface always shows what's going on.",
+      "Turning someone else's design into a working product is a conversation. Every screen raises questions about what should actually happen.",
     ],
     next: ["Vision blocks", "Reading PDFs in the browser", "Comparing two versions side by side in the playground"],
   },
@@ -110,20 +111,20 @@ export const caseStudies: Record<string, CaseStudy> = {
     decisions: [
       {
         title: "Everyone gets their own private world",
-        text: "Your profile, applications and posts are only visible to you. It's a bit of a cheat, but it means I don't have to moderate strangers on a public site. The app tells you this right where you post.",
+        text: "Your profile, applications and posts are only visible to you, so nobody has to moderate strangers on a public site. The app tells you this right where you post.",
       },
       {
         title: "The recruiters are AI",
         text: "Messaging is no fun if nobody answers, so made-up recruiters reply using AI. You can also jump in as a guest with a sample profile and skip giving an email.",
       },
       {
-        title: "Inventing a whole scene",
-        text: "Every real person, team, game and logo from the design had to go, so I replaced them with invented ones. The app says the characters are fictional.",
+        title: "A whole invented scene",
+        text: "Every team and game is original. Each game has its own idea, like a MOBA where the tide floods the map every six minutes, and each team has a story, colors and fans. The app says the characters are fictional.",
       },
     ],
     learned: [
-      "Julian looked at the first version and told me the mobile bar was weird. He was right: it was basically the desktop sidebar lying on its side, with eight icons and no labels. Now there's a top bar and five tabs with actual names.",
-      "He also said the games and teams weren't convincing yet. So each one got its own idea, like a MOBA where the tide floods the map every six minutes. That did more for the demo than any visual polish I could have added.",
+      "Working with the designer pays off. Julian's review shaped the final version, from the mobile navigation to how much personality the games and teams have.",
+      "On a phone, clear labels beat clever icons.",
     ],
     next: ["Letting a guest become a real account without losing anything", "A public player profile you can share"],
   },
@@ -132,22 +133,22 @@ export const caseStudies: Record<string, CaseStudy> = {
       "A document editor where several people write at the same time and watch each other's changes appear, with comments attached to the text, a version history, and documents you can open from a link.",
     decisions: [
       {
-        title: "Moving the realtime part to Cloudflare",
-        text: "The realtime server was on a platform that started asking for a payment method. Keeping everything free is a hard rule for me, so I moved it. Now each open document gets its own Durable Object, and its connections sleep while nobody's typing.",
+        title: "One Durable Object per document",
+        text: "Each open document gets its own small coordinator on Cloudflare, and its connections sleep while nobody's typing. It keeps the realtime part fast and on a free plan.",
       },
       {
         title: "A public guide as the demo",
         text: "Nobody wants to log in just to see what an app does. So the guide opens for anyone, and signing in with GitHub lets you edit it and make your own documents. Other people can edit it too, so please be nice to it.",
       },
       {
-        title: "Working out who can do what",
-        text: "When I tried it with a second account, I couldn't edit public documents I didn't own, and comments and the copy link button weren't working either. Fixing that forced me to decide exactly what each person is allowed to do. I wrote the answer in the guide.",
+        title: "Clear roles",
+        text: "Owners, signed-in visitors and people just reading each get exactly what they need, and the guide spells it out so nobody has to guess.",
       },
     ],
     learned: [
-      "Most of those bugs only showed up with two accounts in two browsers. Testing alone, everything looked fine.",
+      "Collaboration features only really get tested with several people at once. Two accounts in two browsers is the minimum.",
     ],
-    next: ["Comparing versions in the history, because right now you restore a bit blind", "True simultaneous editing with Yjs. Today, if two people write at once, the last one wins"],
+    next: ["Comparing versions in the history view", "True simultaneous editing with Yjs, so two people can type in the same paragraph at once"],
   },
   "journal-app": {
     problem:
@@ -162,32 +163,27 @@ export const caseStudies: Record<string, CaseStudy> = {
         text: "Warm paper colors and a serif font. It's a place to write, so I didn't want it looking like a control panel.",
       },
     ],
-    learned: [
-      "Free database clusters can go to sleep if nobody uses them, and then the app just stops working. It happened to this one. That's the kind of problem you never see on your own computer.",
-      "The header looked fine on desktop, and on a phone \"Sign In\" was splitting into two lines. Now I check things at phone width as a habit.",
-    ],
-    next: ["Moving the data to Cloudflare D1, so the app stops depending on a cluster staying awake"],
+    learned: ["Privacy isn't a feature you add at the end. It has to be part of every request from the start."],
+    next: ["Moving the data to Cloudflare D1, alongside my other projects"],
   },
   "interactive-dashboard": {
     problem:
-      "A dashboard with charts, reports and settings. The first version looked finished, and then you started clicking. Logout did nothing. Dark mode, language and two-factor got saved and then ignored.",
+      "A dashboard with charts, reports and settings, built to feel like a real product even though the data is a sample.",
     decisions: [
       {
-        title: "If a control is there, it has to work",
-        text: "Logout now shows a signed-out screen, the notifications switch shows or hides a bell, and the language switch changes everything between English and Spanish, months and currency included. Two-factor and password reset can't work without a server, so I took them out instead of faking them.",
+        title: "Every control does something",
+        text: "Logout shows a signed-out screen, the notifications switch shows or hides a bell, and the language switch changes everything between English and Spanish, months and currency included. Features that would need a real server aren't faked.",
       },
       {
-        title: "A light theme without rewriting everything",
-        text: "All the components were written with dark colors. Instead of going through every class, light mode redefines the color scale: dark grays turn light and the bright accents get darker so you can still read them.",
+        title: "A light theme from one color scale",
+        text: "Light mode redefines the color scale instead of styling every component twice: dark grays turn light and the bright accents get darker so you can still read them.",
       },
       {
-        title: "Being upfront that it's fake data",
+        title: "Being upfront that it's sample data",
         text: "There's no backend, your settings stay in your browser, and the footer says the data is a sample.",
       },
     ],
-    learned: [
-      "Clicking on everything like a stranger would is a test in itself. That's also how a search turned up the table stuck on \"page 2 of 1\".",
-    ],
+    learned: ["A demo earns trust when every control does what it says, even the small ones nobody expects to click."],
     next: ["Real data from a free public API, maybe my own GitHub activity"],
   },
   "calculator-app": {
@@ -196,29 +192,27 @@ export const caseStudies: Record<string, CaseStudy> = {
     decisions: [
       {
         title: "Showing what a person expects",
-        text: "1.1 + 2.2 used to give 3.3000000000000003, which is technically how computers do decimals and also looks broken. Dividing by zero showed Infinity. Now results get rounded, and dividing by zero tells you in plain words that you can't.",
+        text: "Computers do decimals in binary, so 1.1 + 2.2 can come out as 3.3000000000000003. Results are rounded so you see 3.3, and dividing by zero tells you in plain words that you can't.",
       },
       {
-        title: "Moving the background to CSS",
-        text: "The moving grid behind it ran on React state, so the whole calculator re-rendered around sixty times a second just to animate a background. In CSS it looks the same and leaves the app alone.",
+        title: "Animation in CSS",
+        text: "The moving grid in the background is pure CSS, so it never makes the calculator itself redraw.",
       },
       {
-        title: "Starting my tests here",
-        text: "Working out an expression is plain logic with no interface attached, so it's the easiest place to write tests.",
+        title: "Tested logic",
+        text: "Working out an expression is plain logic with no interface attached, and it's covered by automated tests.",
       },
     ],
-    learned: [
-      "Even something this small is full of decisions. What does a digit do right after equals? What about a second operator in a row? It turns out the space bar could break a calculation, too.",
-    ],
+    learned: ["Even something this small is full of decisions. What does a digit do right after equals? What about a second operator in a row?"],
     next: ["Parentheses and percentages"],
   },
   portfolio: {
     problem:
-      "My old portfolio was a Next.js app, which meant a server and security updates to keep up with, all for what's really just a few pages of content. I liked how it looked, though, so the goal was to keep the look and the colors and drop the rest.",
+      "A home for my projects that's fast, easy to keep up to date, and still has some personality. Most of it is just content, so it didn't need a server at all.",
     decisions: [
       {
-        title: "Astro instead of Next.js",
-        text: "The site is static, so now it ships plain pages and only loads JavaScript where it's needed, like the 3D globe and the contact form. No server means nothing to patch at runtime.",
+        title: "Astro for a static site",
+        text: "The site ships plain pages and only loads JavaScript where it's needed, like the 3D globe and the contact form. No server means nothing to maintain at runtime.",
       },
       {
         title: "Everything has to be free",
@@ -229,9 +223,7 @@ export const caseStudies: Record<string, CaseStudy> = {
         text: "Hover over the F in the corner and there's a cat. It's in every project too, because my actual cat could get angry otherwise. This one wasn't up for debate.",
       },
     ],
-    learned: [
-      "Going through the live sites as a visitor caught things the tests didn't. My favorite: one of my repos had a website link that sent people to a stranger's app.",
-    ],
+    learned: ["Browsing your own site like a visitor, on a phone and a computer, is the best review there is."],
     next: ["More case studies as the projects grow"],
   },
 };
